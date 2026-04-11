@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Modul 6 - jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+
+        .section-title {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin: 30px 0 15px;
+        }
+
+        #demo-hide-show p {
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        #animate-box {
+            background-color: #98bf21;
+            height: 100px;
+            width: 100px;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        #fade-box {
+            width: 200px;
+            height: 60px;
+            background-color: #ffc107;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        #slide-panel {
+            background-color: #cfe2ff;
+            border: 1px solid #9ec5fe;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        #dom-result {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            min-height: 50px;
+        }
+
+        button {
+            margin: 5px 5px 5px 0;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #0d6efd;
+            color: white;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0b5ed7;
+        }
+
+        button.danger {
+            background-color: #dc3545;
+        }
+
+        button.danger:hover {
+            background-color: #bb2d3b;
+        }
+
+        button.success {
+            background-color: #198754;
+        }
+
+        button.success:hover {
+            background-color: #157347;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" style="max-width: 800px; margin: auto;">
+        <h2 class="text-center" style="text-align:center; font-weight:bold; margin-bottom:30px;">
+            Tugas Modul 6 - jQuery
+        </h2>
+
+        <!-- Efek Hide / Show -->
+        <h4 class="section-title">1. Efek Hide / Show</h4>
+        <div id="demo-hide-show">
+            <p>Ini adalah paragraf yang bisa disembunyikan dan dimunculkan menggunakan jQuery.</p>
+            <button id="btn-hide">Hide</button>
+            <button id="btn-show" class="success">Show</button>
+        </div>
+
+        <!-- Efek Animasi Toggle -->
+        <h4 class="section-title">2. Efek Animasi (Toggle Height)</h4>
+        <p>Klik tombol beberapa kali untuk melihat animasi toggle pada kotak di bawah.</p>
+        <button id="btn-animate">Start Animation</button>
+        <div id="animate-box"></div>
+
+        <!-- Efek Fade -->
+        <h4 class="section-title">3. Efek Fade</h4>
+        <button id="btn-fadeout">Fade Out</button>
+        <button id="btn-fadein" class="success">Fade In</button>
+        <button id="btn-fadetoggle">Fade Toggle</button>
+        <div id="fade-box">Kotak Fade</div>
+
+        <!-- Efek Slide -->
+        <h4 class="section-title">4. Efek Slide</h4>
+        <button id="btn-slideup" class="danger">Slide Up</button>
+        <button id="btn-slidedown" class="success">Slide Down</button>
+        <button id="btn-slidetoggle">Slide Toggle</button>
+        <div id="slide-panel">
+            <p>Ini adalah konten panel yang bisa di-slide ke atas dan ke bawah menggunakan jQuery.</p>
+        </div>
+
+        <!-- DOM Manipulation -->
+        <h4 class="section-title">5. Manipulasi DOM</h4>
+        <button id="btn-addtext" class="success">Tambah Teks</button>
+        <button id="btn-changecss">Ubah Warna</button>
+        <button id="btn-reset" class="danger">Reset</button>
+        <div id="dom-result">
+            <p id="dom-paragraph">Paragraf ini bisa dimanipulasi dengan jQuery.</p>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            // Hide / Show
+            $("#btn-hide").click(function () {
+                $("#demo-hide-show p").hide(400);
+            });
+            $("#btn-show").click(function () {
+                $("#demo-hide-show p").show(400);
+            });
+
+            // Animate toggle height
+            $("#btn-animate").click(function () {
+                $("#animate-box").animate({ height: 'toggle' }, 600);
+            });
+
+            // Fade effects
+            $("#btn-fadeout").click(function () {
+                $("#fade-box").fadeOut(600);
+            });
+            $("#btn-fadein").click(function () {
+                $("#fade-box").fadeIn(600);
+            });
+            $("#btn-fadetoggle").click(function () {
+                $("#fade-box").fadeToggle(600);
+            });
+
+            // Slide effects
+            $("#btn-slideup").click(function () {
+                $("#slide-panel").slideUp(500);
+            });
+            $("#btn-slidedown").click(function () {
+                $("#slide-panel").slideDown(500);
+            });
+            $("#btn-slidetoggle").click(function () {
+                $("#slide-panel").slideToggle(500);
+            });
+
+            // DOM Manipulation
+            $("#btn-addtext").click(function () {
+                $("#dom-result").append("<p>Teks baru ditambahkan dengan jQuery!</p>");
+            });
+            $("#btn-changecss").click(function () {
+                $("#dom-paragraph").css({ "color": "#0d6efd", "font-weight": "bold", "font-size": "18px" });
+            });
+            $("#btn-reset").click(function () {
+                $("#dom-result").html('<p id="dom-paragraph">Paragraf ini bisa dimanipulasi dengan jQuery.</p>');
+                $("#dom-paragraph").removeAttr("style");
+            });
+
+        });
+    </script>
+
+</body>
+</html>
