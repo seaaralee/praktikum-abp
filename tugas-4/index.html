@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+
+        .section-title {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin: 20px 0 15px;
+        }
+
+        #demo {
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-radius: 6px;
+            min-height: 60px;
+        }
+
+        #status {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+
+        button {
+            margin: 5px 5px 5px 0;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #0d6efd;
+            color: white;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="max-width: 800px; margin: auto;">
+        <h2 style="text-align:center; font-weight:bold;">Tugas Modul 10 - AJAX</h2>
+
+        <h4 class="section-title">AJAX Request Demo</h4>
+        <p id="demo">Let AJAX change this text.</p>
+        <button type="button" id="changeBtn">Change Content</button>
+        <button type="button" id="resetBtn" style="background-color:#dc3545;">Reset</button>
+        <div id="status">Status: Menunggu aksi...</div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#changeBtn").click(function () {
+                $("#status").text("Status: Sedang melakukan request...");
+
+                $.ajax({
+                    url: "ajax_info.txt",
+                    type: "GET",
+                    dataType: "html",
+                    timeout: 5000,
+                    success: function (result) {
+                        $("#demo").html(result);
+                        $("#status").text("Status: Request berhasil! Konten telah diperbarui.");
+                    },
+                    error: function (xhr, status, error) {
+                        $("#demo").html("<p style='color:red;'>Error: " + error + "</p>");
+                        $("#status").text("Status: Request gagal - " + status);
+                    },
+                    complete: function (xhr, status) {
+                        console.log("Request completed with status: " + status);
+                    }
+                });
+            });
+
+            $("#resetBtn").click(function () {
+                $("#demo").text("Let AJAX change this text.");
+                $("#status").text("Status: Menunggu aksi...");
+            });
+        });
+    </script>
+</body>
+
+</html>
